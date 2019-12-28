@@ -1,6 +1,6 @@
 <?php
 namespace PHPec;
-
+require __DIR__.'/consts.php';
 defined('APP_PATH') || die('未定义APP_PATH'); // 项目源码目录
 defined('APP_NS')   || die('未定义APP_NS');
 
