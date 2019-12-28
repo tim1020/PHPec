@@ -81,6 +81,9 @@ class Response {
             $str = sprintf("HTTP/1.1 %s %s", $this -> status, $this -> statusText);
             header($str);
         } else {
+            if($this -> error) {
+                $this -> body = $this -> error;
+            }
             if($this -> render) {
                 foreach(array_reverse($this -> render) as $cb) {
                     $this -> body = call_user_func($cb, $this -> body);
