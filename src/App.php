@@ -2,10 +2,36 @@
 namespace PHPec;
 
 final class App {
+    private $mHead = null; // 队头
+    private $mTail = null; // 队尾
+
     function run() {
-        $c = sprintf("\\%s\\controller\\%s", APP_NS, 'Helloworld'); 
-        $act = $_GET['act'] ?? '_default';
-        if(!method_exists($c, $act)) $act = '_default';
-        call_user_func([new $c, $act]); // 调用名为Helloworld的控制器，执行act指定的方法
+        $this -> _add('Dispatcher');
+        $this -> mHead -> handle();
+    }
+    
+    // use方法处理
+    function __call($name, $args) {
+        if ($name == 'use') {
+            foreach ($args as $v) {
+                $this -> _add($v);  
+            }
+        }
+    }
+
+    // 加入一个中间件
+    private function _add($middleware) {
+        $m = APP_NS.'\middleware\\' .$middleware;
+        if(!class_exists($m)) {
+            $m = "PHPec\middleware\\".$middleware;
+        }
+        $m = new $m;
+        if(!$this -> mHead) {
+            $this -> mHead = $m;
+            $this -> mTail = $m;
+        } else {
+            $this -> mTail -> setNext($m);
+            $this -> mTail = $m;
+        }
     }
 }
