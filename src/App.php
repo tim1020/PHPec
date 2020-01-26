@@ -2,12 +2,18 @@
 namespace PHPec;
 
 final class App {
+    use DITrait;
     private $mHead = null; // 队头
     private $mTail = null; // 队尾
+
+    function __construct(){
+        $this -> _add('Router');
+    }
 
     function run() {
         $this -> _add('Dispatcher');
         $this -> mHead -> handle();
+        $this -> Response -> flush();
     }
     
     // use方法处理
