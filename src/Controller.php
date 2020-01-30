@@ -5,8 +5,7 @@ namespace PHPec;
 class Controller {
     use DITrait;
     protected $Validator; 
-    protected $services = []; // 注入的service， ['类名']
     function __construct() {
-        // $this -> Validator  = new Validator();
+        $this -> Validator  = new Validator();
     }
 }
