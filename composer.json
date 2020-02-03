@@ -3,7 +3,8 @@
     "description":"一个简单易用、功能完整的轻量级开发框架",
     "require": {
         "monolog/monolog":"2.0.*",
-        "particle/validator":"^2.0"
+        "particle/validator":"^2.0",
+        "twig/twig":"^2.0"
     },
     "autoload": {
         "psr-4":{
