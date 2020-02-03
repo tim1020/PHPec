@@ -64,7 +64,7 @@ class Response {
         $this -> tpl_name = $name;
     }
     // 获取模板名称
-    public function getTplName($name) {
+    public function getTplName() {
         return $this -> tpl_name;
     }
     // 设置render方法

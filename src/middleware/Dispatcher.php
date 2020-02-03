@@ -30,6 +30,7 @@ class Dispatcher extends Middleware{
         $action = array_pop($path);
         $path[] = ucfirst(strtolower(array_pop($path))); // 控制器类名转换为首字母大小，其余全小写
         $controller = implode("\\", $path);
+        $this -> Response -> setTplName(strtolower($controller.'_'.$action));
         $class = sprintf('%s\controller\%s', APP_NS, $controller);
         try{
             $ref = new \ReflectionClass($class);
